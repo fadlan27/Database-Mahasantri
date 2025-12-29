@@ -1,0 +1,169 @@
+/* Mobile specific styles */
+@media (max-width: 768px) {
+
+    /* Global Compact Text */
+    body {
+        font-size: 0.8125rem;
+        /* ~13px */
+    }
+
+    /* Force tighter headings */
+    h1 {
+        font-size: 1.25rem !important;
+        line-height: 1.3 !important;
+    }
+
+    /* text-xl */
+    h2 {
+        font-size: 1.125rem !important;
+        line-height: 1.3 !important;
+    }
+
+    /* text-lg */
+    h3 {
+        font-size: 1rem !important;
+        line-height: 1.3 !important;
+    }
+
+    /* text-base */
+    p {
+        font-size: 0.8125rem !important;
+    }
+
+    /* Force tighter container padding */
+    main {
+        padding: 0.5rem !important;
+        /* Override p-4 */
+    }
+
+    /* Reduce gap in grids/flex containers if utilizing standard 'gap-6' */
+    .gap-6 {
+        gap: 0.75rem !important;
+    }
+
+    .gap-4 {
+        gap: 0.5rem !important;
+    }
+
+    .space-y-6>*+* {
+        margin-top: 0.75rem !important;
+    }
+
+    .space-y-4>*+* {
+        margin-top: 0.5rem !important;
+    }
+
+    /* Layout Adjustments */
+    .container,
+    .content-wrapper {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    /* Form Optimization - Compact */
+    input,
+    select,
+    textarea {
+        width: 100%;
+        max-width: 100%;
+        font-size: 0.8125rem;
+        /* Smaller text */
+        padding: 0.5rem 0.75rem;
+        /* Reduced padding */
+        height: auto;
+    }
+
+    /* Button Touch Targets - Compact but usable */
+    button,
+    a.btn,
+    .clickable {
+        min-height: 36px;
+        /* Reduced from 44px */
+        min-width: 36px;
+        font-size: 0.8125rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Table to Card Transformation */
+    table.data-table,
+    .dataTable {
+        display: block;
+        width: 100%;
+    }
+
+    table.data-table thead,
+    .dataTable thead {
+        display: none;
+    }
+
+    table.data-table tbody,
+    .dataTable tbody {
+        display: block;
+        width: 100%;
+    }
+
+    table.data-table tr,
+    .dataTable tr {
+        display: block;
+        background: rgba(255, 255, 255, 0.5);
+        /* Semi transparent white */
+        margin-bottom: 0.5rem;
+        /* Reduced from 1rem */
+        border-radius: 0.5rem;
+        /* Slightly tighter radius */
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 0.75rem;
+        /* Reduced from 1rem */
+        box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+        /* Lighter shadow */
+    }
+
+    .dark table.data-table tr,
+    .dark .dataTable tr {
+        background: rgba(30, 41, 59, 0.5);
+        border-color: rgba(255, 255, 255, 0.05);
+    }
+
+    table.data-table td,
+    .dataTable td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.35rem 0;
+        /* Reduced from 0.5rem */
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        text-align: right;
+        font-size: 0.8125rem;
+    }
+
+    .dark table.data-table td,
+    .dark .dataTable td {
+        border-bottom-color: rgba(255, 255, 255, 0.05);
+    }
+
+    table.data-table td:last-child,
+    .dataTable td:last-child {
+        border-bottom: none;
+    }
+
+    table.data-table td::before,
+    .dataTable td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        text-align: left;
+        margin-right: 0.75rem;
+        font-size: 0.75rem;
+        /* Smaller label */
+        color: #64748b;
+        text-transform: uppercase;
+        /* Styled for compactness */
+        letter-spacing: 0.025em;
+    }
+
+    .dark table.data-table td::before,
+    .dark .dataTable td::before {
+        color: #94a3b8;
+    }
+}

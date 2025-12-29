@@ -1,0 +1,155 @@
+<?php
+// install_db_hosting.php
+// GENERATED INSTALLER FOR: if0_40595177_jamiah_abat_db
+ini_set('display_errors', 1);
+ini_set('max_execution_time', 600);
+ini_set('memory_limit', '256M');
+
+echo "<html><head><title>Database Installer</title></head><body style='background:#f3f4f6; padding:20px; font-family:sans-serif;'>";
+echo "<div style='max-width:800px; margin:0 auto; background:white; padding:30px; border-radius:10px; shadow:0 4px 6px rgba(0,0,0,0.1);'>";
+echo "<h1 style='color:#2563eb; border-bottom:2px solid #e5e7eb; padding-bottom:10px;'>📦 Install Database Hosting</h1>";
+
+$host = 'sql100.infinityfree.com';
+$db   = 'if0_40595177_jamiah_abat_db';
+$user = 'if0_40595177';
+$pass = 'Bungganteng21';
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    echo "<p style='color:green; font-weight:bold;'>✅ Connected to Hosting Database!</p>";
+} catch (PDOException $e) {
+    die("<h3 style='color:red;'>❌ Connection Failed: " . $e->getMessage() . "</h3></div></body></html>");
+}
+
+echo "<div style='background:#1e293b; color:#cbd5e1; padding:15px; border-radius:8px; height:400px; overflow-y:auto; font-family:monospace; font-size:12px;'>";
+
+$pdo->exec("SET FOREIGN_KEY_CHECKS=0");
+
+$start = microtime(true);
+$errors = 0;
+// --- TABLE: history_kelas ---
+echo '> Dropping history_kelas... ';
+try { $pdo->exec('DROP TABLE IF EXISTS `history_kelas`'); echo 'OK<br>'; } catch(Exception $e) { echo '<span style="color:#f87171">ERR: '.$e->getMessage().'</span><br>'; }
+echo '> Creating history_kelas... ';
+try { $pdo->exec('CREATE TABLE `history_kelas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `mahasantri_id` int NOT NULL,
+  `old_mustawa` varchar(50) DEFAULT NULL,
+  `new_mustawa` varchar(50) DEFAULT NULL,
+  `tanggal_promosi` datetime DEFAULT CURRENT_TIMESTAMP,
+  `keterangan` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `mahasantri_id` (`mahasantri_id`),
+  CONSTRAINT `history_kelas_ibfk_1` FOREIGN KEY (`mahasantri_id`) REFERENCES `mahasantri` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci'); echo 'OK<br>'; } catch(Exception $e) { echo '<span style="color:#f87171">ERR: '.$e->getMessage().'</span><br>'; $errors++; }
+echo '<br>';
+
+// --- TABLE: mahasantri ---
+echo '> Dropping mahasantri... ';
+try { $pdo->exec('DROP TABLE IF EXISTS `mahasantri`'); echo 'OK<br>'; } catch(Exception $e) { echo '<span style="color:#f87171">ERR: '.$e->getMessage().'</span><br>'; }
+echo '> Creating mahasantri... ';
+try { $pdo->exec('CREATE TABLE `mahasantri` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nim` varchar(20) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `gender` enum(\'Ikhwan\',\'Akhowat\') NOT NULL,
+  `tanggal_lahir` date DEFAULT NULL,
+  `angkatan` year NOT NULL,
+  `mustawa` varchar(100) DEFAULT NULL,
+  `status` enum(\'Aktif\',\'Cuti\',\'Lulus\',\'Dikeluarkan\',\'Drop Out\') DEFAULT \'Aktif\',
+  `tahun_lulus_masehi` varchar(20) DEFAULT NULL,
+  `tahun_lulus_hijriah` varchar(20) DEFAULT NULL,
+  `asal` varchar(100) DEFAULT NULL,
+  `tempat_lahir` varchar(100) DEFAULT NULL,
+  `asal_ppui` varchar(100) DEFAULT NULL,
+  `alamat_lengkap` text,
+  `kelurahan` varchar(100) DEFAULT NULL,
+  `kecamatan` varchar(100) DEFAULT NULL,
+  `kabupaten` varchar(100) DEFAULT NULL,
+  `provinsi` varchar(100) DEFAULT NULL,
+  `nama_ayah` varchar(150) DEFAULT NULL,
+  `nama_ibu` varchar(150) DEFAULT NULL,
+  `wa_wali` varchar(20) DEFAULT NULL,
+  `photo_path` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nim` (`nim`),
+  KEY `idx_nama` (`nama`),
+  KEY `idx_nim` (`nim`),
+  KEY `idx_status` (`status`),
+  KEY `idx_angkatan` (`angkatan`)
+) ENGINE=InnoDB AUTO_INCREMENT=851 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci'); echo 'OK<br>'; } catch(Exception $e) { echo '<span style="color:#f87171">ERR: '.$e->getMessage().'</span><br>'; $errors++; }
+echo '> Inserting 66 rows into mahasantri... ';
+$pdo->exec('INSERT INTO `mahasantri` VALUES (\'29\',\'14460402428\',\'Abdurrahman\',\'Ikhwan\',\'2010-06-03\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Aceh\',\'Kuning\',\'Aceh\',\'Anak Reje, Blang Pegayon Gayo Lues Aceh\',\'Porang\',\'Blangkejeren\',\'Kabupaten Gayo Lues\',\'Aceh\',\'Zulkarnain\',\'Siti Suwarni\',\'6285359548050\',NULL,\'2025-12-20 15:14:36\',\'2025-12-20 17:23:29\'),(\'30\',\'14460402447\',\'Miftahul Huda Gayo\',\'Ikhwan\',\'2011-04-18\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Aceh\',\'Subulussalam\',\'Aceh\',\'Des. Lag Bersih, Kel. Dusun Cahaya Baru, Penaggalan, Kota Subulussalam 24882\',\'\',\'\',\'Gayo Lues\',\'\',\'Syafi\\\'i\',\'Isnaini\',\'6282364615862\',NULL,\'2025-12-20 15:14:36\',\'2025-12-20 18:25:08\'),(\'31\',\'14460402454\',\'Muhammad Khadafick\',\'Ikhwan\',\'2011-05-22\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Kampung Baru\',\'Margodadi\',\'Jl.habibah,rt 04 Kec.sanga-sang Kaltim\',\'\',\'\',\'\',\'\',\'Imron Wahhab\',\'Surianti\',\'6282252815649\',NULL,\'2025-12-20 15:14:36\',\'2025-12-20 18:04:26\'),(\'32\',\'14460402455\',\'Muhammad Khalid Asyrofi\',\'Ikhwan\',\'2012-03-12\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Aceh\',\'Kutacane\',\'Aceh\',\'Cempa, Blangkejeren, Gayo Lues, Nangroe Aceh Darussalam\',\'\',\'\',\'\',\'Aceh\',\'Zulfandi\',\'Ely Rosdiana\',\'6285342115156\',NULL,\'2025-12-20 15:14:36\',\'2025-12-20 16:32:50\'),(\'33\',\'14460402458\',\'Muhammad Taqi Mufid\',\'Ikhwan\',\'2011-06-25\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Aceh\',\'Blangkejeren\',\'Aceh\',\'Penampaan Uken, Blangkejeren, Gayo Lues, Nad\',\'\',\'\',\'\',\'\',\'Hamzah Fanshuri\',\'Farida Dilot\',\'6281260302992\',NULL,\'2025-12-20 15:14:36\',\'2025-12-20 16:32:50\'),(\'34\',\'14460402460\',\'Raihan Abdi Syuhada\',\'Ikhwan\',\'2011-10-06\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Aceh\',\'Medan\',\'Aceh\',\'Kel. Terjun, Medan Marelan, Sumut\',\'Terjun\',\'\',\'\',\'\',\'Abdika Rafil\',\'Desi Ari Santi\',\'628236326170\',NULL,\'2025-12-20 15:14:36\',\'2025-12-20 16:32:50\'),(\'36\',\'14460402429\',\'Abadri Apriaji\',\'Ikhwan\',\'2010-04-13\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Sukabumi\',\'Karawang\',\'Sukabumi\',\'Perum Citra Kebun Mas Blok U 09/no 15,rt. 18,rw. 08 ,ds. Bengle, Kec. Majalaya, Karawang\',\'Bengle\',\'Majalaya\',\'\',\'\',\'Sipon\',\'Junarsih\',\'6285881742946\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'37\',\'14460402430\',\'Abdul Chaidir Safarullah\',\'Ikhwan\',\'2012-01-01\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Borneo\',\'Penajam\',\'Borneo\',\'Jl. Dokter Sutomo, Sepaku, Ppu, Kal-tim\',\'\',\'\',\'\',\'\',\'Mukhlis\',\'Anik Fujiyanti\',\'6285753334929\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'38\',\'14460402431\',\'Abdul Fathir Baraja\',\'Ikhwan\',NULL,\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Ambon\',\'Margodadi\',\'Mojokerto\',\'\',\'\',\'\',\'\',\'Zakky Baraja\',\'Kamalia Amar\',\'6281355100138\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:04:10\'),(\'39\',\'14460402432\',\'Abdul Goffar Asy Syahid\',\'Ikhwan\',\'2011-06-04\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Taman Rejo\',\'Margodadi\',\'Gedong Tataan, Pesawaran\',\'\',\'\',\'\',\'\',\'Firliyanto\',\'May Susilawati\',\'628538069479\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:04:10\'),(\'40\',\'14460402433\',\'Abdullah Ridwan\',\'Ikhwan\',\'2012-02-01\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Pringsewu\',\'Margodadi\',\'Kaliawi, Gedong Tataan, Pringsewu\',\'\',\'\',\'\',\'\',\'Rusydianto\',\'Nur Mastuti\',\'6285367109276\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'41\',\'14460402434\',\'Ahmad Abdullah\',\'Ikhwan\',\'2011-06-15\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Palembang\',\'Margodadi\',\'Karang Rejo, Suka Maju, Lamsel\',\'\',\'\',\'\',\'\',\'Siswanto\',\'Titik Swandayani\',\'6285321609785\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:04:10\'),(\'42\',\'14460402435\',\'Ahmad Sulaiman\',\'Ikhwan\',\'2011-05-01\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Sukabumi\',\'Bekasi\',\'Sukabumi\',\'Tambun, Bekasi\',\'\',\'\',\'\',\'\',\'Rodi Abdur Rasyid\',\'Shabrina\',\'6289613504228\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'43\',\'14460402436\',\'Ananda Rizki Maulana\',\'Ikhwan\',\'2010-10-23\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Sukabumi\',\'Tegal\',\'Sukabumi\',\'Jl Kakatua, Rt 07, Rw 08, Kali Bliruk, Ds Slawi Kulon, Kec Slawi, Kab Tegal, 52419\',\'Slawi Kulon\',\'Slawi\',\'Kab Tegal\',\'\',\'Amir Mahmud\',\'Eni Royani\',\'6285712783965\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'44\',\'14460402437\',\'Ansharuddin\',\'Ikhwan\',\'2013-07-11\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Sukabumi\',\'Pati\',\'Sukabumi\',\'Kp. Cihuni Rt 04/02, Ds. Cikembar, Kec. Cikembar, Kab. Sukabumi, Prov. Jawa Barat 43157\',\'Cikembar\',\'Cikembar\',\'Kab. Sukabumi\',\'Jawa Barat\',\'Sutrisno\',\'Annisa\',\'628210545171\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'45\',\'14460402440\',\'Hasan Al Bana Husain Kadri\',\'Ikhwan\',\'2010-01-01\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Borneo\',\'Banjar\',\'Borneo\',\'Des. Timbaan, Tapin Selatan, Tapin, Kal-sel\',\'\',\'\',\'\',\'\',\'Husein Kadri\',\'Nur Azizah\',\'6285923311718\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'46\',\'14460402441\',\'Ibnu Kholil\',\'Ikhwan\',\'2011-01-18\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Mekar Jaya\',\'Margodadi\',\'Muko Muko, Bengkulu\',\'\',\'\',\'\',\'Bengkulu\',\'Supriyatna\',\'Rodhiyah\',\'6285379511806\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 18:04:26\'),(\'47\',\'14460402442\',\'Ilham Baihaqi Ramadhan\',\'Ikhwan\',\'2011-08-17\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Sukabumi\',\'Indramayu\',\'Sukabumi\',\'Blok Dusun Tengah Rt 13/06 Ds. Cangkingan, Kec. Kedokan Kab. Indramayu, Prov. Jawa Barat\',\'Cangkingan\',\'Kedokan\',\'Kab. Indramayu\',\'Jawa Barat\',\'Waito\',\'Lilis\',\'6289571102882\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'48\',\'14460402443\',\'Kholid Ar Rohiq\',\'Ikhwan\',\'2011-01-01\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Bengkulu\',\'Margodadi\',\'Meakar Jaya, Kab. Muko Muko\',\'\',\'\',\'\',\'\',\'Syamsuddin\',\'Rahmini\',\'6282375645280\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 18:04:26\'),(\'49\',\'14460402444\',\'Muhammad Mukhlashin\',\'Ikhwan\',\'2011-05-20\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Metro\',\'Margodadi\',\'Labuhan Ratu Lampung Timur\',\'\',\'\',\'\',\'Lampung\',\'Andi Wiono\',\'Asih Wigati\',\'6285273417348\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:04:10\'),(\'50\',\'14460402445\',\'Muhammad Mukhlishin\',\'Ikhwan\',\'2011-05-20\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Metro\',\'Margodadi\',\'Labuhan Ratu Lampung Timur\',\'\',\'\',\'\',\'Lampung\',\'Andi Wiono\',\'Asih Wigati\',\'6285273417348\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:04:10\'),(\'52\',\'14460402448\',\'Muhammad Abdullah Akbar\',\'Ikhwan\',\'2007-01-01\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Borneo\',\'Penajam\',\'Borneo\',\'Jl. Pelampang, Tanjung Tengah, Ppu, Kal-tim\',\'\',\'\',\'\',\'\',\'Sangkala Hasan\',\'Yanti\',\'6281253867832\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'53\',\'14460402449\',\'Muhammad Abdullah Ansharullah\',\'Ikhwan\',\'2009-01-01\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Borneo\',\'Banjar\',\'Borneo\',\'Des. Sungai Sipai, Martapura, Banjar, Kal-sel\',\'\',\'\',\'\',\'\',\'Ahmad Junaidi\',\'Mahmuda\',\'6281251223169\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'54\',\'14460402450\',\'Muhammad Azhar Sjahu\',\'Ikhwan\',\'2011-01-01\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Borneo\',\'Penajam\',\'Borneo\',\'Kel. Pemaluan, Kec. Sepaku, Kab. Ppu, Kal-tim\',\'Pemaluan\',\'Sepaku\',\'Kab. PPU\',\'\',\'Musthafa\',\'Nasriati\',\'6282351554343\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'55\',\'14460402451\',\'Muhammad Akmal Abdus Salamuhammad\',\'Ikhwan\',\'2011-12-19\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Sukabumi\',\'Banten\',\'Sukabumi\',\'Kp. Cihuni Rt 04/02, Ds. Cikembar, Kec. Cikembar, Kab. Sukabumi, Prov. Jawa Barat 43157\',\'Cikembar\',\'Cikembar\',\'Kab. Sukabumi\',\'Jawa Barat\',\'Sukardi\',\'Sumaryati\',\'6282117002990\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'56\',\'14460402452\',\'Muhammad Fadhli Al Jabbar\',\'Ikhwan\',\'2011-12-03\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Lampung\',\'Margodadi\',\'Tbb, Kibang Yekti Jaya\',\'\',\'\',\'\',\'\',\'Suherman\',\'Mirna\',\'6285267131869\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 18:04:26\'),(\'57\',\'14460402453\',\'Muhammad Fahril\',\'Ikhwan\',\'2008-10-26\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Sukabumi\',\'Banten\',\'Sukabumi\',\'Kampung Cipariama Cibatuk Keusik Banjar Sari Kab Lebak Provinsi Banten\',\'\',\'\',\'Kab Lebak\',\'Banten\',\'Ali Musa\',\'Tayah Handayani\',\'6281315280267\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'60\',\'14460402456\',\'Muhammad Muklas Hidayat\',\'Ikhwan\',\'2010-03-27\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Sukabumi\',\'Karawang\',\'Sukabumi\',\'Kp Krajan Rt 01/01 Ds Jomin Timur Kec Kota Baru Kab Karawang\',\'Jomin Timur\',\'\',\'Kota baru Kab Karawang\',\'\',\'Rohmat Hidayat\',\'Ai Juwarsih\',\'6281223187434\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'61\',\'14460402457\',\'Muhammad Syaiqudin Abdul Hakimuhammad\',\'Ikhwan\',\'2010-08-30\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Sukabumi\',\'Sukabumi\',\'Sukabumi\',\'Fasum Bic Ruko No A18, Ds. Wanakerta, Kec. Bungursari, Kab. Purwakrta, Prov. Jawa Barat\',\'Wanakerta\',\'Bungursari\',\'Kab. Purwakrta\',\'Jawa Barat\',\'Abdurrahman\',\'Khadijah Izzatul Azka\',\'6281332111346\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'63\',\'14460402459\',\'Nasrullah\',\'Ikhwan\',\'2011-04-29\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Aceh\',\'?medan\',\'Aceh\',\'Bagan, Kota Medan Sumatra Utara\',\'\',\'\',\'Kota Medan Sumatra Utara\',\'\',\'Junaidi\',\'Misna\',\'6282167564355\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'65\',\'14460402461\',\'Roif Al Ghifary\',\'Ikhwan\',\'2010-01-01\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Sukabumi\',\'Bandung\',\'Sukabumi\',\'Bandung Desa Arjasari Jawa Barat\',\'Arjasari\',\'\',\'\',\'Jawa Barat\',\'Rohmat\',\'Saidah\',\'6281321223799\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'66\',\'14460402462\',\'Yazdad Zean Ramadhan\',\'Ikhwan\',\'2009-08-17\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Bandung\',\'Margodadi\',\'Kp. Geger Kalong Girang, Bandung\',\'\',\'\',\'\',\'\',\'Zulkifli\',\'Sri Mulyani\',\'6282120150012\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'67\',\'14460402463\',\'Zakaria Zaki\',\'Ikhwan\',\'2011-07-17\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Godadi\',\'Margodadi\',\'Margodadi\',\'\',\'\',\'\',\'\',\'Sholehuddin\',\'Riati\',\'6285222838554\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:04:10\'),(\'68\',\'14460402464\',\'Tegar Syahputra\',\'Ikhwan\',\'2011-10-29\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Pang\',\'Margodadi\',\'Tanjung Bintang, Lampung Selatan\',\'\',\'\',\'\',\'Lampung\',\'Jumio\',\'Lilis\',\'\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'69\',\'14460402465\',\'Thariq Hizbullah\',\'Ikhwan\',\'2009-09-27\',\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'Aceh\',\'Kota Cane\',\'Aceh\',\'Kota Cane, Aceh Tenggara\',\'\',\'\',\'Kota Cane\',\'Aceh\',\'Basroni\',\'Hayatun Nasrah\',\'6282364177737\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 16:32:50\'),(\'70\',\'14460402466\',\'Muhammad Rafi\',\'Ikhwan\',NULL,\'2025\',\'Awwal\',\'Aktif\',NULL,NULL,\'\',\'\',\'Margodadi\',\'\',\'\',\'\',\'\',\'\',\'Radiono\',\'\',\'\',NULL,\'2025-12-20 15:16:01\',\'2025-12-20 18:10:35\'),(\'791\',\'14450402350\',\'Abdillah Fattah\',\'Ikhwan\',\'2010-07-23\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Teluk Betung\',\'Margodadi\',\'Umbulasem, Teluk Betung\',\'\',\'\',\'\',\'\',\'Agus Salim\',\'Susanti\',\'6282373962250\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'792\',\'14450402385\',\'Abdul Hamid An Nafis\',\'Ikhwan\',\'2010-09-16\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Aceh\',\'Padang\',\'Aceh\',\'Aampang Karang Ganting\',\'\',\'\',\'\',\'\',\'Rudianto\',\'Mira Andriyani\',\'6285365655337\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'793\',\'14450402366\',\'Abdullah Umar\',\'Ikhwan\',\'2011-03-28\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Sukabumi\',\'Brebes\',\'Sukabumi\',\'Bumi Ayu\',\'\',\'\',\'\',\'\',\'Sukadi Karyoto\',\'Esih Sukaesih\',\'6285227812006\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'794\',\'14450402377\',\'Abiyyu Akmal\',\'Ikhwan\',\'2009-06-30\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Aceh\',\'Medan Elan\',\'Aceh\',\'Pasar 4, Jl.abdul Sani Muthalib\',\'\',\'\',\'\',\'\',\'Suhartono\',\'Nur Maziyah\',\'6285271965143\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'795\',\'14450402376\',\'Ahmad Khadafi Hasibuan\',\'Ikhwan\',\'2010-02-22\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Aceh\',\'Medan\',\'Aceh\',\'Hemparan Perak, Deli Serdang, Medan\',\'\',\'\',\'\',\'\',\'Julianto\',\'Siti Khusniyah\',\'6281339307394\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'796\',\'14450402352\',\'Azka Prabu\',\'Ikhwan\',\'2011-03-25\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Bengkulu\',\'Margodadi\',\'Wai Serdang, Mesuji\',\'\',\'\',\'\',\'\',\'Prayetno\',\'Shomia\',\'6282182930542\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'797\',\'14450402351\',\'Azzam Az Zikri\',\'Ikhwan\',\'2010-01-01\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Punduh Pidada – –\',\'Margodadi\',\'Kel. Bangun Rejo, Kab. Pesawaran, Kec. Punduh Pidada, Kab. Lampung\',\'Bangun Rejo\',\'Punduh Pidada\',\'Kab. Pesawaran\',\'Lampung\',\'Jumadi\',\'Fatonah\',\'6285383050970\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'798\',\'14450402353\',\'Chandra Ferdiansyah\',\'Ikhwan\',\'2009-01-01\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Mesuji\',\'Margodadi\',\'Tebing Karya Mandiri Lampung\',\'\',\'\',\'\',\'Lampung\',\'Samuji\',\'Inayah\',\'6285381360783\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'799\',\'14450402379\',\'Furqan Jaswin Alya\',\'Ikhwan\',\'2010-12-11\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Aceh\',\'Aceh Gayo Luwes\',\'Aceh\',\'Belangkejren, Terminal, Aceh\',\'\',\'\',\'\',\'Aceh\',\'Amri\',\'Sawarna\',\'6285321358220\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'800\',\'14450402354\',\'Gilang Ade Genta Putra\',\'Ikhwan\',\'2009-03-21\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Palembang\',\'Margodadi\',\'Kp. Khilafah\',\'\',\'\',\'\',\'\',\'Genta\',\'Eka\',\'6283838443433\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'801\',\'14450402380\',\'Hadid Ali Syahbana\',\'Ikhwan\',\'2010-11-10\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Aceh\',\'Kota Cane\',\'Aceh\',\'Jl. Cempa, Belangkejren, Aceh\',\'\',\'\',\'\',\'Aceh\',\'Dzul Pandi\',\'Eni Frosdiana\',\'6282238062125\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'802\',\'14450402367\',\'Indra Firdan Nurhardiansyah\',\'Ikhwan\',\'2010-01-02\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Sukabumi\',\'Indramayu\',\'Sukabumi\',\'Blok Budiraja Rt. 03/01 Kel. Pringgacala, Kec. Karangampel, Kab. Indramayu Prov. Jawa Barat\',\'Pringgacala\',\'Karangampel\',\'Kab. Indramayu\',\'Jawa Barat\',\'Nurhedi\',\'Watuni\',\'6285295668164\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'803\',\'14450402368\',\'Jahid Asykar Hafidz\',\'Ikhwan\',\'2010-09-18\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Sukabumi\',\'Purwakarta\',\'Sukabumi\',\'Kp. Kembang Sepatu Rt. 13/06, Kel. Cibodas, Kec. Bungur Sari, Kab. Purwakarta, Prov. Jawa Barat\',\'Cibodas\',\'Bungur Sari\',\'Kab. Purwakarta\',\'Jawa Barat\',\'Mahfudi\',\'Eti Rohaeti\',\'6287778905191\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'804\',\'14450402355\',\'Jundy Nafis Al Wafi\',\'Ikhwan\',\'2010-08-23\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Wai Jepara\',\'Margodadi\',\'Wai Jepara, Lampung Timur,\',\'\',\'\',\'\',\'Lampung\',\'Abdul Aziz\',\'Nur Haniah\',\'6282376202257\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\')');
+$pdo->exec('INSERT INTO `mahasantri` VALUES (\'805\',\'14450402381\',\'M Fahri Gultom\',\'Ikhwan\',\'2010-01-10\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Aceh\',\'Medan\',\'Aceh\',\'Jl. Pelita 4, Kec. Kp. Durian\',\'\',\'Kp\',\'\',\'\',\'Safril Gultom\',\'Heni Miranda\',\'6282368579322\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'806\',\'14450402357\',\'M. Al Fathah\',\'Ikhwan\',\'2011-02-10\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Pulau Sebuku\',\'Margodadi\',\'Kalimantan\',\'\',\'\',\'\',\'\',\'Ahmad Lamo\',\'Nur Saidah\',\'6281347252499\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'807\',\'14450402358\',\'M. Al Fathir\',\'Ikhwan\',\'2010-08-13\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Sinar Laut\',\'Margodadi\',\'Kampung Sinar Laut, Teluk Betung\',\'\',\'\',\'\',\'\',\'M. Ridwan\',\'Bariyah\',\'6282306572342\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'808\',\'14450402386\',\'M. Fadhil Al Hudzaifah\',\'Ikhwan\',\'2010-01-17\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Aceh\',\'Aceh Gayo Luwes\',\'Aceh\',\'Belangkejren, Blower, Aceh\',\'\',\'\',\'\',\'Aceh\',\'Gunawan Suprato\',\'Hamidah\',\'6282165091586\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'809\',\'14450402384\',\'M. Fahmi Maulana\',\'Ikhwan\',\'2010-02-11\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Aceh\',\'Medan – Belauan\',\'Aceh\',\'Jl. Yong Panah Hijau, Kec. Deli Serdang\',\'\',\'Deli Serdang\',\'\',\'\',\'Sofian\',\'Khansati\',\'6285362615064\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'810\',\'14450402356\',\'M. Faiz Ahsan\',\'Ikhwan\',\'2010-06-11\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Teluk Betung\',\'Margodadi\',\'No. 33, Rt. 9, Rw. 2 Kota Karang\',\'\',\'\',\'\',\'\',\'Umar Anggara\',\'Erna Wati\',\'6282188172115\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:17:58\'),(\'811\',\'14450402382\',\'M. Fatih Al Zamzami\',\'Ikhwan\',\'2010-12-11\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Aceh\',\'Aceh Gayo Luwes\',\'Aceh\',\'Belangkejren, Ra Lunung, Aceh\',\'\',\'\',\'\',\'Aceh\',\'Wahyuddin\',\'Arni\',\'6282229379669\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'812\',\'14450402361\',\'M. Husain\',\'Ikhwan\',NULL,\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Bandar Lampung\',\'Margodadi\',\'Gudang Agen, Bandar Lampung\',\'\',\'\',\'\',\'Lampung\',\'Abdul Lathif\',\'Riana Yanti\',\'6281279613686\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'813\',\'14450402359\',\'Miqdad Fatahillah\',\'Ikhwan\',\'2009-11-24\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Kp Bru\',\'Margodadi\',\'Kab. Pesawaran, Kec.\',\'\',\'\',\'Kab. Pesawaran\',\'\',\'M. Thohir\',\'Husnul Khotimah\',\'6282372643732\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'814\',\'14450402373\',\'Rijal Awaludin\',\'Ikhwan\',NULL,\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Sukabumi\',\'Indramayu\',\'Sukabumi\',\'Rt. 09/02 Kel. Kedokan Bunder Wetan, Kec. Kedokan Bunder, Kab. Indramayu, Prov. Jawa Barat\',\'Kedokan Bunder Wetan\',\'Kedokan Bunder\',\'Kab. Indramayu\',\'Jawa Barat\',\'Makhfudin\',\'Nurhayati\',\'6283147821838\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'815\',\'14450402362\',\'Rizla Ababil\',\'Ikhwan\',NULL,\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Kp Khilafah Lampung\',\'Margodadi\',\'Kel. Karang Sari, Kabb. Lamsel, Kp. Khilafah, Kec. Jati Agung\',\'Karang Sari\',\'Jati Agung\',\'\',\'\',\'Tusman Asih\',\'Agna\',\'6289690586817\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'816\',\'14450402363\',\'Sabil Haqiqi\',\'Ikhwan\',\'2009-11-05\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Margodadi\',\'Lampung\',\'Margodadi\',\'Teluk Betung\',\'\',\'\',\'\',\'\',\'Munzir\',\'Rita Aisyah\',\'6281369298497\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'817\',\'14450402383\',\'Samsul Bahri Hasibuan\',\'Ikhwan\',\'2010-04-11\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Aceh\',\'Medan\',\'Aceh\',\'Hamparan Perak, Deli Serdang, Medan\',\'\',\'\',\'\',\'\',\'Ali Syahbana\',\'Kamiah\',\'6282370597766\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'818\',\'14450402374\',\'Syaddad Abdullah\',\'Ikhwan\',\'2011-04-20\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Sukabumi\',\'Purwakarta\',\'Sukabumi\',\'Perum Bumi Gandasari No. 235 Rt 26/07, Kel. Cigelam Kec. Cikao, Kab. Purwakarta, Prov. Jawa Barat\',\'Cigelam\',\'Cikao\',\'Kab. Purwakarta\',\'Jawa Barat\',\'Taufik Hidayat\',\'Adhi Wahyuningrum\',\'6281389480401\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:07:20\'),(\'819\',\'14450402375\',\'Syahid Mujahidin\',\'Ikhwan\',\'2008-06-11\',\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'Sukabumi\',\'Masalembu\',\'Sukabumi\',\'Surabaya\',\'\',\'\',\'KABUPATEN MOJOKERTO\',\'JAWA TIMUR\',\'M. Syafi’i E\',\'Khairuinnisa\',\'6281336026712\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:27:52\'),(\'820\',\'14450402427\',\'Ridwan\',\'Ikhwan\',NULL,\'2024\',\'Tsani\',\'Aktif\',NULL,NULL,\'\',\'\',\'Borneo\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',NULL,\'2025-12-20 18:00:47\',\'2025-12-20 18:11:26\')');
+echo 'Done.<br>';
+echo '<br>';
+
+// --- TABLE: pelanggaran ---
+echo '> Dropping pelanggaran... ';
+try { $pdo->exec('DROP TABLE IF EXISTS `pelanggaran`'); echo 'OK<br>'; } catch(Exception $e) { echo '<span style="color:#f87171">ERR: '.$e->getMessage().'</span><br>'; }
+echo '> Creating pelanggaran... ';
+try { $pdo->exec('CREATE TABLE `pelanggaran` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `mahasantri_id` int NOT NULL,
+  `nim` varchar(50) DEFAULT NULL,
+  `tanggal` date NOT NULL,
+  `jenis` enum(\'Ringan\',\'Sedang\',\'Berat\') NOT NULL,
+  `tingkat_sanksi` enum(\'Normal\',\'SP1\',\'SP2\',\'SP3\',\'DO\') DEFAULT \'Normal\',
+  `deskripsi` text,
+  `sanksi` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `mahasantri_id` (`mahasantri_id`),
+  KEY `idx_violation_nim` (`nim`),
+  CONSTRAINT `pelanggaran_ibfk_1` FOREIGN KEY (`mahasantri_id`) REFERENCES `mahasantri` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci'); echo 'OK<br>'; } catch(Exception $e) { echo '<span style="color:#f87171">ERR: '.$e->getMessage().'</span><br>'; $errors++; }
+echo '<br>';
+
+// --- TABLE: system_logs ---
+echo '> Dropping system_logs... ';
+try { $pdo->exec('DROP TABLE IF EXISTS `system_logs`'); echo 'OK<br>'; } catch(Exception $e) { echo '<span style="color:#f87171">ERR: '.$e->getMessage().'</span><br>'; }
+echo '> Creating system_logs... ';
+try { $pdo->exec('CREATE TABLE `system_logs` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `username` varchar(100) NOT NULL DEFAULT \'System\',
+  `action` varchar(100) NOT NULL,
+  `details` text,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci'); echo 'OK<br>'; } catch(Exception $e) { echo '<span style="color:#f87171">ERR: '.$e->getMessage().'</span><br>'; $errors++; }
+echo '> Inserting 12 rows into system_logs... ';
+$pdo->exec('INSERT INTO `system_logs` VALUES (\'1\',\'1\',\'admin\',\'Update Data\',\'Mengubah data santri: Abdurrahman (14460402428)\',\'2025-12-20 17:23:29\'),(\'2\',\'1\',\'admin\',\'Update Data\',\'Mengubah data santri: Ridwan (14450402427)\',\'2025-12-20 18:01:15\'),(\'3\',\'1\',\'admin\',\'Update Data\',\'Mengubah data santri: Ibnu Kholil (14460402441)\',\'2025-12-20 18:02:50\'),(\'4\',\'1\',\'admin\',\'Update Data\',\'Mengubah data santri: Kholid Ar Rohiq (14460402443)\',\'2025-12-20 18:02:59\'),(\'5\',\'1\',\'admin\',\'Update Data\',\'Mengubah data santri: Muhammad Fadhli Al Jabbar (14460402452)\',\'2025-12-20 18:03:06\'),(\'6\',\'1\',\'admin\',\'Update Data\',\'Mengubah data santri: Muhammad Khadafick (14460402454)\',\'2025-12-20 18:03:12\'),(\'7\',\'1\',\'admin\',\'Update Data\',\'Mengubah data santri: Muhammad Rafi (14460402466)\',\'2025-12-20 18:10:35\'),(\'8\',\'1\',\'admin\',\'Update Data\',\'Mengubah data santri: Ridwan (14450402427)\',\'2025-12-20 18:11:26\'),(\'9\',\'1\',\'admin\',\'Update Data\',\'Mengubah data santri: M. Faiz Ahsan (14450402356)\',\'2025-12-20 18:17:58\'),(\'10\',\'1\',\'admin\',\'Update Data\',\'Mengubah data santri: Miftahul Huda Gayo (14460402447)\',\'2025-12-20 18:19:50\'),(\'11\',\'1\',\'admin\',\'Quick Update\',\'Updated kabupaten for ID 30 to \\\'Gayo Lues\\\'\',\'2025-12-20 18:25:08\'),(\'12\',\'1\',\'admin\',\'Quick Update\',\'Updated fields for ID 819\',\'2025-12-20 18:27:52\')');
+echo 'Done.<br>';
+echo '<br>';
+
+// --- TABLE: users ---
+echo '> Dropping users... ';
+try { $pdo->exec('DROP TABLE IF EXISTS `users`'); echo 'OK<br>'; } catch(Exception $e) { echo '<span style="color:#f87171">ERR: '.$e->getMessage().'</span><br>'; }
+echo '> Creating users... ';
+try { $pdo->exec('CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `full_name` varchar(100) NOT NULL,
+  `role` enum(\'admin\',\'ustadz\') DEFAULT \'ustadz\',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci'); echo 'OK<br>'; } catch(Exception $e) { echo '<span style="color:#f87171">ERR: '.$e->getMessage().'</span><br>'; $errors++; }
+echo '> Inserting 1 rows into users... ';
+$pdo->exec('INSERT INTO `users` VALUES (\'1\',\'admin\',\'$2y$10$kLl7jPEiRi5dLTBnWTIdZe8Bra./KX4bFO8kV.TAcl7hLr8cwoRtS\',\'Administrator\',\'admin\',\'2025-12-20 08:38:37\')');
+echo 'Done.<br>';
+echo '<br>';
+
+$pdo->exec("SET FOREIGN_KEY_CHECKS=1");
+$end = microtime(true);
+$time = round($end - $start, 2);
+
+echo "</div>";
+echo "<h3 style='color:green;'>🎉 DONE! Processed in $time sec. Errors: $errors</h3>";
+echo "<p style='background:#fef2f2; color:#b91c1c; padding:10px; border:1px solid #fca5a5; border-radius:5px;'>⚠️ <strong>IMPORTANT:</strong> Please DELETE this file (<code>install_db_hosting.php</code>) from your hosting file manager immediately for security!</p>";
+echo "<a href='index.php' style='display:inline-block; background:#2563eb; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;'>Go to Dashboard</a>";
+echo "</div></body></html>";

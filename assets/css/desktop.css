@@ -1,0 +1,4 @@
+/* Desktop specific styles can go here */
+@media (min-width: 769px) {
+    /* Ensure sidebar is visible or other desktop layout fixes if needed */
+}

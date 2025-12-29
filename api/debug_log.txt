@@ -1,0 +1,250 @@
+2025-12-20 07:20:04 - HIT: /Database%20Mahasantri/api/student_handler.php
+POST Data: Array
+(
+    [action] => update
+    [id] => 3
+    [nama] => Da
+    [nim] => 45645
+    [status] => Aktif
+    [gender] => Akhowat
+    [angkatan] => 2014
+    [mustawa] => Awwal
+    [provinsi] => SUMATERA BARAT
+    [kabupaten] => KABUPATEN SIJUNJUNG
+    [kecamatan] => TANJUNG GADANG
+    [kelurahan] => TANJUNG GADANG
+    [asal] => Tanjung Gadang
+    [asal_ppui] => PPUI Rahasia
+    [tempat_lahir] => Depok
+    [tanggal_lahir] => 1998-02-11
+    [alamat_lengkap] => Fafa
+    [nama_ayah] => Fgdsg
+    [nama_ibu] => Ghdfhdf
+    [wa_wali] => 245548484
+)
+
+2025-12-20 07:20:04 - POST Request: Array
+(
+    [action] => update
+    [id] => 3
+    [nama] => Da
+    [nim] => 45645
+    [status] => Aktif
+    [gender] => Akhowat
+    [angkatan] => 2014
+    [mustawa] => Awwal
+    [provinsi] => SUMATERA BARAT
+    [kabupaten] => KABUPATEN SIJUNJUNG
+    [kecamatan] => TANJUNG GADANG
+    [kelurahan] => TANJUNG GADANG
+    [asal] => Tanjung Gadang
+    [asal_ppui] => PPUI Rahasia
+    [tempat_lahir] => Depok
+    [tanggal_lahir] => 1998-02-11
+    [alamat_lengkap] => Fafa
+    [nama_ayah] => Fgdsg
+    [nama_ibu] => Ghdfhdf
+    [wa_wali] => 245548484
+)
+
+Update ID: 3 Params: Array
+(
+    [0] => 45645
+    [1] => Da
+    [2] => Akhowat
+    [3] => 2014
+    [4] => Awwal
+    [5] => Aktif
+    [6] => Tanjung Gadang
+    [7] => PPUI Rahasia
+    [8] => Fafa
+    [9] => Sumatera Barat
+    [10] => Kabupaten Sijunjung
+    [11] => Tanjung Gadang
+    [12] => Tanjung Gadang
+    [13] => 1998-02-11
+    [14] => Fgdsg
+    [15] => Ghdfhdf
+    [16] => 245548484
+    [17] => Depok
+    [18] => 3
+)
+
+Update Success
+2025-12-20 07:22:01 - HIT: /Database%20Mahasantri/api/student_handler.php
+POST Data: Array
+(
+    [action] => update
+    [id] => 2
+    [nama] => Somad
+    [nim] => 456
+    [status] => Aktif
+    [gender] => Ikhwan
+    [angkatan] => 2000
+    [mustawa] => Tsani
+    [provinsi] => JAWA TENGAH
+    [kabupaten] => KABUPATEN SRAGEN
+    [kecamatan] => GEMOLONG
+    [kelurahan] => KWANGEN
+    [asal] => Gemolong
+    [asal_ppui] => PPUI ABA Lampung
+    [tempat_lahir] => Depok
+    [tanggal_lahir] => 1997-05-06
+    [alamat_lengkap] => Ggfsgsfg
+    [nama_ayah] => Gsdgs
+    [nama_ibu] => Gdsgsd
+    [wa_wali] => 082110408035
+)
+
+2025-12-20 07:22:01 - POST Request: Array
+(
+    [action] => update
+    [id] => 2
+    [nama] => Somad
+    [nim] => 456
+    [status] => Aktif
+    [gender] => Ikhwan
+    [angkatan] => 2000
+    [mustawa] => Tsani
+    [provinsi] => JAWA TENGAH
+    [kabupaten] => KABUPATEN SRAGEN
+    [kecamatan] => GEMOLONG
+    [kelurahan] => KWANGEN
+    [asal] => Gemolong
+    [asal_ppui] => PPUI ABA Lampung
+    [tempat_lahir] => Depok
+    [tanggal_lahir] => 1997-05-06
+    [alamat_lengkap] => Ggfsgsfg
+    [nama_ayah] => Gsdgs
+    [nama_ibu] => Gdsgsd
+    [wa_wali] => 082110408035
+)
+
+Update ID: 2 Params: Array
+(
+    [0] => 456
+    [1] => Somad
+    [2] => Ikhwan
+    [3] => 2000
+    [4] => Tsani
+    [5] => Aktif
+    [6] => Gemolong
+    [7] => PPUI ABA Lampung
+    [8] => Ggfsgsfg
+    [9] => Jawa Tengah
+    [10] => Kabupaten Sragen
+    [11] => Gemolong
+    [12] => Kwangen
+    [13] => 1997-05-06
+    [14] => Gsdgs
+    [15] => Gdsgsd
+    [16] => 082110408035
+    [17] => Depok
+    [18] => 2
+)
+
+Update Success
+--- New Import Debug ---
+Detected Headers: NIM | Nama | Gender | Tempat Lahir | Tanggal Lahir | Angkatan | Mustawa | Status | Alamat Lengkap | Asal PPUI | Nama Ayah | Nama Ibu | No WA
+Mapped 'nim' to Index: 0
+Mapped 'nama' to Index: 1
+Mapped 'gender' to Index: 2
+Mapped 'tempat_lahir' to Index: 3
+Mapped 'tanggal_lahir' to Index: 4
+Mapped 'angkatan' to Index: 5
+Mapped 'mustawa' to Index: 6
+Mapped 'status' to Index: 7
+Mapped 'asal' to Index: 9
+Mapped 'asal_ppui' to Index: 9
+Mapped 'alamat_lengkap' to Index: 8
+Mapped 'provinsi' to Index: -1
+Mapped 'kabupaten' to Index: -1
+Mapped 'kecamatan' to Index: -1
+Mapped 'kelurahan' to Index: -1
+Mapped 'nama_ayah' to Index: 10
+Mapped 'nama_ibu' to Index: 11
+Mapped 'wa_wali' to Index: 6
+--- New Import Debug ---
+Detected Headers: NIM | Nama | Gender | Tempat Lahir | Tanggal Lahir | Angkatan | Mustawa | Status | Alamat Lengkap | Asal PPUI | Nama Ayah | Nama Ibu | No WA
+Mapped 'nim' to Index: 0
+Mapped 'nama' to Index: 1
+Mapped 'gender' to Index: 2
+Mapped 'tempat_lahir' to Index: 3
+Mapped 'tanggal_lahir' to Index: 4
+Mapped 'angkatan' to Index: 5
+Mapped 'mustawa' to Index: 6
+Mapped 'status' to Index: 7
+Mapped 'asal' to Index: 9
+Mapped 'asal_ppui' to Index: 9
+Mapped 'alamat_lengkap' to Index: 8
+Mapped 'provinsi' to Index: -1
+Mapped 'kabupaten' to Index: -1
+Mapped 'kecamatan' to Index: -1
+Mapped 'kelurahan' to Index: -1
+Mapped 'nama_ayah' to Index: 10
+Mapped 'nama_ibu' to Index: 11
+Mapped 'wa_wali' to Index: 6
+--- New Import Debug ---
+Detected Headers: NIM | Nama | Gender | Tempat Lahir | Tanggal Lahir | Angkatan | Mustawa | Status | Alamat Lengkap | Asal PPUI | Nama Ayah | Nama Ibu | No WA
+Mapped 'nim' to Index: 0
+Mapped 'nama' to Index: 1
+Mapped 'gender' to Index: 2
+Mapped 'tempat_lahir' to Index: 3
+Mapped 'tanggal_lahir' to Index: 4
+Mapped 'angkatan' to Index: 5
+Mapped 'mustawa' to Index: 6
+Mapped 'status' to Index: 7
+Mapped 'asal' to Index: 9
+Mapped 'asal_ppui' to Index: 9
+Mapped 'alamat_lengkap' to Index: 8
+Mapped 'provinsi' to Index: -1
+Mapped 'kabupaten' to Index: -1
+Mapped 'kecamatan' to Index: -1
+Mapped 'kelurahan' to Index: -1
+Mapped 'nama_ayah' to Index: 10
+Mapped 'nama_ibu' to Index: 11
+Mapped 'wa_wali' to Index: 12
+--- New Import Debug ---
+Detected Headers: NIM | Nama | Gender | Tempat Lahir | Tanggal Lahir | Angkatan | Mustawa | Status | Alamat Lengkap | Asal PPUI | Nama Ayah | Nama Ibu | WA Wali
+Mapped 'nim' to Index: 0
+Mapped 'nama' to Index: 1
+Mapped 'gender' to Index: 2
+Mapped 'tempat_lahir' to Index: 3
+Mapped 'tanggal_lahir' to Index: 4
+Mapped 'angkatan' to Index: 5
+Mapped 'mustawa' to Index: 6
+Mapped 'status' to Index: 7
+Mapped 'asal' to Index: 9
+Mapped 'asal_ppui' to Index: 9
+Mapped 'alamat_lengkap' to Index: 8
+Mapped 'provinsi' to Index: -1
+Mapped 'kabupaten' to Index: -1
+Mapped 'kecamatan' to Index: -1
+Mapped 'kelurahan' to Index: -1
+Mapped 'nama_ayah' to Index: 10
+Mapped 'nama_ibu' to Index: 11
+Mapped 'wa_wali' to Index: 12
+--- New Import Debug ---
+Detected Headers: NIM | Nama | Gender | Tempat Lahir | Tanggal Lahir | Angkatan | Mustawa | Status | Alamat Lengkap | Asal PPUI | Nama Ayah | Nama Ibu | WA Wali
+Mapped 'nim' to Index: 0
+Mapped 'nama' to Index: 1
+Mapped 'gender' to Index: 2
+Mapped 'tempat_lahir' to Index: 3
+Mapped 'tanggal_lahir' to Index: 4
+Mapped 'angkatan' to Index: 5
+Mapped 'mustawa' to Index: 6
+Mapped 'status' to Index: 7
+Mapped 'asal' to Index: 9
+Mapped 'asal_ppui' to Index: 9
+Mapped 'alamat_lengkap' to Index: 8
+Mapped 'provinsi' to Index: -1
+Mapped 'kabupaten' to Index: -1
+Mapped 'kecamatan' to Index: -1
+Mapped 'kelurahan' to Index: -1
+Mapped 'nama_ayah' to Index: 10
+Mapped 'nama_ibu' to Index: 11
+Mapped 'wa_wali' to Index: 12
+Attempting upload for Abdillah Fattah_Agus Salim...
+Upload success: uploads/abdillah_fattah_agus_salim_1766934218.jpg
+Attempting upload for Abdillah Fattah_Agus Salim...
+Upload success: uploads/abdillah_fattah_agus_salim_1766938864.jpg
