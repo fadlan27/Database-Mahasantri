@@ -4,52 +4,32 @@
 
 **URL**: https://github.com/fadlan27/Database-Mahasantri
 
-## Apa ini?
-
-Ini adalah **Sistem Manajemen Santri** yang komprehensif untuk Pondok Pesantren, dilengkapi dengan **EduCal Pro**—kalender akademik canggih dengan dukungan tanggal Hijriah, penjadwalan berbasis prioritas, dan manajemen data santri (Biodata, Pelanggaran, Prestasi).
-
-## Teknologi apa yang digunakan?
-
-Proyek ini dibangun menggunakan teknologi standar industri yang handal:
-
-- **PHP 8.x** (Backend Native)
-- **MySQL / MariaDB** (Database)
-- **Tailwind CSS** (Styling Modern)
-- **Vanilla JavaScript** (Frontend Interaktif)
-- **Lucide Icons** (Aset UI)
-
-## Bagaimana cara menjalankannya di lokal?
-
-Anda memerlukan lingkungan server lokal seperti **Laragon**, **XAMPP**, atau **MAMP**.
-
-**Ikuti langkah-langkah berikut:**
-
-```sh
-# Langkah 1: Clone repositori ini ke dalam folder root web Anda (misal: c:/laragon/www)
-git clone https://github.com/fadlan27/Database-Mahasantri.git
-
-# Langkah 2: Masuk ke direktori proyek
-cd "Database Mahasantri"
-
-# Langkah 3: Pengaturan Database
-# Buka manajer database Anda (phpMyAdmin/HeidiSQL).
-# Buat database baru bernama 'mahasantri_db' (atau sesuaikan dengan file config).
-# Import struktur/data SQL yang disediakan.
-
-# Langkah 4: Jalankan
-# Buka browser Anda dan kunjungi: http://database-mahasantri.test
-# (Atau http://localhost/Database-Mahasantri tergantung pengaturan Anda)
-```
-
 ## Bagaimana cara mengedit kode ini?
+
+Ada beberapa cara untuk mengedit aplikasi Anda.
 
 **Gunakan IDE pilihan Anda**
 
-Kami merekomendasikan menggunakan **VS Code** dengan ekstensi PHP.
-- Clone repo ini.
-- Buka folder di IDE Anda.
-- Lakukan perubahan pada `calendar.php` atau modul lainnya.
-- Perubahan akan terlihat langsung saat di-refresh (tidak perlu proses build untuk PHP).
+Jika Anda ingin bekerja secara lokal menggunakan IDE sendiri (seperti VS Code), Anda dapat meng-clone repo ini dan melakukan push perubahan.
+
+Satu-satunya persyaratan adalah memiliki server PHP lokal (Laragon/XAMPP) & Git.
+
+Ikuti langkah-langkah ini:
+
+```sh
+# Langkah 1: Clone repositori menggunakan URL Git proyek.
+git clone https://github.com/fadlan27/Database-Mahasantri.git
+
+# Langkah 2: Masuk ke direktori proyek.
+cd "Database Mahasantri"
+
+# Langkah 3: Persiapan Database.
+# Buka phpMyAdmin, buat database 'mahasantri_db', lalu import file SQL yang tersedia.
+
+# Langkah 4: Jalankan server pengembangan.
+# Buka Laragon/XAMPP, klik 'Start All'.
+# Buka browser dan akses: http://database-mahasantri.test
+```
 
 **Edit file langsung di GitHub**
 
@@ -57,22 +37,22 @@ Kami merekomendasikan menggunakan **VS Code** dengan ekstensi PHP.
 - Klik tombol "Edit" (ikon pensil) di kanan atas tampilan file.
 - Lakukan perubahan dan commit perubahan tersebut.
 
-## Bagaimana cara mendeploy proyek ini?
+## Teknologi apa yang digunakan?
 
-1.  **Upload File**: Upload isi folder root ke `public_html` hosting Anda melalui FTP atau File Manager.
-2.  **Database**: Ekspor database lokal Anda (`.sql`) dan import ke Database hosting live Anda.
-3.  **Konfigurasi**: Buka `config/database.php` (atau file koneksi) dan perbarui kredensialnya:
-    ```php
-    $host = 'localhost';
-    $user = 'user_hosting_anda';
-    $pass = 'pass_hosting_anda';
-    $db   = 'nama_db_hosting_anda';
-    ```
-4.  **Selesai**: Aplikasi Anda sekarang sudah live!
+Proyek ini dibangun dengan:
+
+- PHP 8.x (Native)
+- MySQL (Database)
+- Tailwind CSS (CDN)
+- Vanilla JavaScript
+- Lucide Icons
+
+## Bagaimana cara deploy proyek ini?
+
+Cukup upload semua file ke `public_html` di hosting Anda dan import database. Sesuaikan konfigurasi di `config/database.php`.
 
 ## Bisakah saya menghubungkan domain kustom?
 
-Ya! Jika menggunakan cPanel atau VPS, cukup arahkan **A Record** domain Anda ke IP server Anda atau atur Nameservers ke penyedia hosting Anda.
+Ya, Anda bisa!
 
----
-*Dikelola oleh [Fadlan27](https://github.com/fadlan27)*
+Untuk menghubungkan domain, arahkan DNS (A Record) domain Anda ke IP server hosting Anda.
